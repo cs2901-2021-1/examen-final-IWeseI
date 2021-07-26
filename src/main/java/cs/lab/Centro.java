@@ -24,7 +24,7 @@ public class Centro {
         logger.log(Level.INFO, notificacion);
     }
 
-    void addPersonaParcialmenteCVacunada(Persona p){
+    void addPersonaParcialmenteVacunada(Persona p){
         personasPv.add(p);
         String notificacion = "Felicidades, " + p.name + " usted ha sido parcialmente vacunado.";
         final Logger logger = Logger.getLogger(Aplicacion.class.getName());

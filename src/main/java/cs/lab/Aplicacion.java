@@ -39,6 +39,8 @@ public class Aplicacion {
             input.reverse();
             if(usuario.username.equals(u) && input.toString().equals(c)){
                 loggedIn = true;
+                String texto = "Log in completado\n ";
+                logger.log(Level.INFO, texto);
                 break;
             }
         }
@@ -47,7 +49,7 @@ public class Aplicacion {
     void generalInfo(){
         long personasV = 0;
         long personasPV = 0;
-        String texto = "Numero de Centros de vacunación: " + centros.size();
+        String texto = "Numero de Centros de vacunacion: " + centros.size();
         logger.log(Level.INFO, texto);
 
         for(Centro centro : centros){
@@ -63,42 +65,36 @@ public class Aplicacion {
         texto = "Numero de Personas vacunadas completamente: " + personasV;
         logger.log(Level.INFO, texto);
 
-        texto = "Avance de la Vacunación: " + personasPV/22935533 + "%";
+        texto = "Avance de la Vacunacion: " + personasPV/22935533 + "%";
         logger.log(Level.INFO, texto);
 
-        texto = "Cobertura de la Vacunación: " + personasV/22935533 + "%";
+        texto = "Cobertura de la Vacunacion: " + personasV/22935533 + "%";
         logger.log(Level.INFO, texto);
     }
 
-    void darAlta(){
-        String texto = "Nombre de centro:\n ";
-        logger.log(Level.INFO, texto);
-        String c = in.nextLine();
+    void darAlta(String c){
         for(Centro centro : centros){
             if(c.equals(centro.name)){
                 centro.operando = true;
-                texto = "Centro se dio de alta\n ";
+                String texto = "Centro se dio de alta\n ";
                 logger.log(Level.INFO, texto);
                 return;
             }
         }
-        texto = "Centro no se dio de alta, no existe\n ";
+        String texto = "Centro no se dio de alta, no existe\n ";
         logger.log(Level.INFO, texto);
     }
 
-    void darBaja(){
-        String texto = "Nombre de centro:\n ";
-        logger.log(Level.INFO, texto);
-        String c = in.nextLine();
+    void darBaja(String c){
         for(Centro centro : centros){
             if(c.equals(centro.name)){
                 centro.operando = false;
-                texto = "Centro se dio de baja\n ";
+                String texto = "Centro se dio de baja\n ";
                 logger.log(Level.INFO, texto);
                 return;
             }
         }
-        texto = "Centro no se dio de baja, no existe\n ";
+        String texto = "Centro no se dio de baja, no existe\n ";
         logger.log(Level.INFO, texto);
     }
 
@@ -127,8 +123,18 @@ public class Aplicacion {
                     return;
                 }
                 case "1" -> generalInfo();
-                case "2" -> darAlta();
-                case "3" -> darBaja();
+                case "2" -> {
+                    texto = "Nombre de centro:\n ";
+                    logger.log(Level.INFO, texto);
+                    c = in.nextLine();
+                    darAlta(c);
+                }
+                case "3" -> {
+                    texto = "Nombre de centro:\n ";
+                    logger.log(Level.INFO, texto);
+                    c = in.nextLine();
+                    darBaja(c);
+                }
                 default -> {
                     texto = "Ninguna opcion se inserto\n ";
                     logger.log(Level.INFO, texto);
