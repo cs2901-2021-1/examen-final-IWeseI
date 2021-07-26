@@ -37,7 +37,7 @@ public class Aplicacion {
             var input = new StringBuilder();
             input.append(u);
             input.reverse();
-            if(usuario.username == u && input.toString() == c){
+            if(usuario.username.equals(u) && input.toString().equals(c)){
                 loggedIn = true;
                 break;
             }
@@ -51,7 +51,7 @@ public class Aplicacion {
         logger.log(Level.INFO, texto);
 
         for(Centro centro : centros){
-            if(centro.operando) {
+            if(Boolean.TRUE.equals(centro.operando)) {
                 personasV = personasV + centro.personasV.size();
                 personasPV = personasPV + centro.personasPv.size();
             }
@@ -111,10 +111,12 @@ public class Aplicacion {
         String c = in.nextLine();
         loginUser(u,c);
         while (loggedIn) {
-            texto = "Si desea ver informacion general inserte 1\n" +
-                    "Si desea dar de Alta un centro inserte 2\n" +
-                    "Si desea dar de Baja un centro inserte 3\n" +
-                    "Si desea cerrar sesión inserte 4\n";
+            texto = """
+                    Si desea ver informacion general inserte 1
+                    Si desea dar de Alta un centro inserte 2
+                    Si desea dar de Baja un centro inserte 3
+                    Si desea cerrar sesión inserte 4
+                    """;
             logger.log(Level.INFO, texto);
             String r = in.nextLine();
             switch (r) {
@@ -127,6 +129,10 @@ public class Aplicacion {
                 case "1" -> generalInfo();
                 case "2" -> darAlta();
                 case "3" -> darBaja();
+                default -> {
+                    texto = "Ninguna opcion se inserto\n ";
+                    logger.log(Level.INFO, texto);
+                }
             }
 
         }
